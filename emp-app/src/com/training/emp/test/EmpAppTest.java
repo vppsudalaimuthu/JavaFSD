@@ -12,9 +12,9 @@ import com.training.emp.service.EmployeeServiceImpl;
 public class EmpAppTest {
 
 	static Scanner userInput = new Scanner(System.in);
-	
+
 	private static void doMenuOperation(int menuOption) {
-		
+
 		EmployeeService empService = new EmployeeServiceImpl();
 
 		switch (menuOption) {
@@ -47,8 +47,10 @@ public class EmpAppTest {
 			userInput.nextLine();
 			System.out.print("Enter Employee Name:");
 			String newEmpName = userInput.nextLine();
+			System.out.print("Enter Employee Salary:");
+			float newEmpSalary = userInput.nextFloat();
 
-			Employee newEmp = new Employee(newEmpId, newEmpName);
+			Employee newEmp = new Employee(newEmpId, newEmpName, newEmpSalary);
 			empService.save(newEmp);
 			System.out.println("New Employee is created successfully.");
 
@@ -84,10 +86,10 @@ public class EmpAppTest {
 			}
 
 			break;
-			
+
 		case 6:
 			ArrayList<Employee> empList = empService.sortById();
-			
+
 			if (empList.size() == 0) {
 				System.out.println("Employees are not found in your database");
 			}
@@ -97,10 +99,10 @@ public class EmpAppTest {
 			}
 
 			break;
-			
+
 		case 7:
 			ArrayList<Employee> employeeList = empService.sortByName();
-			
+
 			if (employeeList.size() == 0) {
 				System.out.println("Employees are not found in your database");
 			}
@@ -110,7 +112,33 @@ public class EmpAppTest {
 			}
 
 			break;
-			
+
+		case 8:
+			ArrayList<Employee> maxSalEmps = empService.listMaxSalaryEmployees();
+
+			if (maxSalEmps.size() == 0) {
+				System.out.println("Employees are not found in your database");
+			}
+
+			for (Employee emp : maxSalEmps) {
+				System.out.println(emp);
+			}
+
+			break;
+
+		case 9:
+			ArrayList<Employee> minSalEmps = empService.listMinSalaryEmployees();
+
+			if (minSalEmps.size() == 0) {
+				System.out.println("Employees are not found in your database");
+			}
+
+			for (Employee emp : minSalEmps) {
+				System.out.println(emp);
+			}
+
+			break;
+
 		default:
 			System.out.println("Invalid Option");
 			break;
@@ -129,20 +157,22 @@ public class EmpAppTest {
 		System.out.println("5 -> Delete Employee");
 		System.out.println("6 -> Sort Employees By ID");
 		System.out.println("7 -> Sort Employees By Name");
+		System.out.println("8 -> List Max Salary Employees");
+		System.out.println("9 -> List Min Salary Employees");
 		System.out.println("0 -> Exit");
 		System.out.println("-------------------------------");
 
 		System.out.println("Select any one of the option....");
 		int menuOption = userInput.nextInt();
-		
+
 		while (menuOption > 0) {
-			
+
 			doMenuOperation(menuOption);
 			System.out.println("Select any option to continue..otherwise press 0 to exit");
 			menuOption = userInput.nextInt();
-			
+
 		}
-		
+
 		System.out.println("Exit Successfully.");
 
 		userInput.close();

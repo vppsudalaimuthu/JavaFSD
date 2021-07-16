@@ -19,5 +19,9 @@ public interface EmployeeService {
 	ArrayList<Employee> sortById();
 	
 	ArrayList<Employee> sortByName();
+	
+    ArrayList<Employee> listMaxSalaryEmployees();
+	
+	ArrayList<Employee> listMinSalaryEmployees();
 
 }

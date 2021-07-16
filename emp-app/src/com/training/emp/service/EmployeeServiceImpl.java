@@ -11,24 +11,24 @@ import com.training.emp.repository.EmployeeRepository;
 import com.training.emp.repository.EmployeeRepositoryImpl;
 
 public class EmployeeServiceImpl implements EmployeeService {
-	private static EmployeeRepository repository;
-	//private static EmployeeDAO dao;
+	//private static EmployeeRepository repository;
+	private static EmployeeDAO dao;
 
 	public EmployeeServiceImpl() {
-		repository = new EmployeeRepositoryImpl();
-//		dao = new EmployeeDAOImpl();
+		//repository = new EmployeeRepositoryImpl();
+		dao = new EmployeeDAOImpl();
 	}
 
 	@Override
 	public Set<Employee> findAll() {
-		return repository.findAll();
-//		return dao.findAll();
+//		return repository.findAll();
+		return dao.findAll();
 	}
 
 	@Override
 	public Employee findById(int id) throws EmployeeNotFoundException {
-		Employee employee = repository.findById(id);
-//		Employee employee = dao.findById(id);
+//		Employee employee = repository.findById(id);
+		Employee employee = dao.findById(id);
 		if (employee == null) {
 			throw new EmployeeNotFoundException("Employee Id Not Found");
 		} else {
@@ -39,46 +39,59 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void save(Employee employee) {
 		
-		repository.save(employee);
-//		dao.save(employee);
+//		repository.save(employee);
+		dao.save(employee);
 
 	}
 
 	@Override
 	public void update(Employee employee) throws EmployeeNotFoundException {
-		Employee result = repository.findById(employee.getId());
-//		Employee result = dao.findById(employee.getId());
+//		Employee result = repository.findById(employee.getId());
+		Employee result = dao.findById(employee.getId());
 		if (result == null) {
 			throw new EmployeeNotFoundException("Employee Id Not Found");
 		} else {
-			repository.update(employee);
-//			dao.update(employee);
+//			repository.update(employee);
+			dao.update(employee);
 		}
 
 	}
 
 	@Override
 	public void delete(int id) throws EmployeeNotFoundException {
-		Employee employee = repository.findById(id);
-		//Employee employee = dao.findById(id);
+//		Employee employee = repository.findById(id);
+		Employee employee = dao.findById(id);
 		if (employee == null) {
 			throw new EmployeeNotFoundException("Employee doesn't exist!!");
 		} else {
-			repository.delete(id);
-			//dao.delete(id);
+//			repository.delete(id);
+			dao.delete(id);
 		}
 	}
 	
 	@Override
 	public ArrayList<Employee> sortById() {
 		
-		return repository.sortById();
+//		return repository.sortById();
+		return dao.sortById();
 	}
 	
 	@Override
 	public ArrayList<Employee> sortByName() {
 		
-		return repository.sortByName();
+//		return repository.sortByName();
+		return dao.sortByName();
+	}
+	
+	@Override
+	public ArrayList<Employee> listMaxSalaryEmployees() {
+		
+		return dao.listMaxSalaryEmployees();
 	}
 
+	@Override
+	public ArrayList<Employee> listMinSalaryEmployees() {
+		
+		return dao.listMinSalaryEmployees();
+	}
 }
