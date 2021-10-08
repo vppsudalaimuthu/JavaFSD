@@ -7,6 +7,7 @@ public class Q1_BasicCalculator {
 				//        Do basic arithmetic operations on args
 				
 				//Get String args and convert into Integer values for arithmetic calculation
+				//Added comment for git checking
 				
 				Integer num1 = Integer.parseInt(args[0]);
 				Integer num2 = Integer.parseInt(args[1]);
